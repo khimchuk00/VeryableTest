@@ -18,6 +18,7 @@
 		6A948AFB265FF403005A22DA /* VryPallete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A948AF6265FF403005A22DA /* VryPallete.swift */; };
 		6A948AFF265FF490005A22DA /* UIFont+Vry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A948AFE265FF490005A22DA /* UIFont+Vry.swift */; };
 		6A948B01265FF5CA005A22DA /* ViewColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A948B00265FF5CA005A22DA /* ViewColor.swift */; };
+		E3616CC4294E6080009362B2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3616CC3294E6080009362B2 /* NetworkManager.swift */; };
 		E3616CC6294E63DB009362B2 /* DefaultError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3616CC5294E63DB009362B2 /* DefaultError.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		6A948B00265FF5CA005A22DA /* ViewColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewColor.swift; sourceTree = "<group>"; };
 		B65FE61971F35C89FD901862 /* Pods-Veryable Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Veryable Sample.release.xcconfig"; path = "Target Support Files/Pods-Veryable Sample/Pods-Veryable Sample.release.xcconfig"; sourceTree = "<group>"; };
 		CDFCC6589E8234DDBAFB6174 /* Pods_Veryable_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Veryable_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3616CC3294E6080009362B2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E3616CC5294E63DB009362B2 /* DefaultError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,7 @@
 		515EC6B1242E5FBA00B21DBB /* Veryable Sample */ = {
 			isa = PBXGroup;
 			children = (
+				E3616CC2294E606F009362B2 /* Managers */,
 				515EC6B2242E5FBA00B21DBB /* AppDelegate.swift */,
 				6A948ADF265FEEA0005A22DA /* Features */,
 				6A948AE9265FEFEF005A22DA /* Repositories */,
@@ -176,6 +179,14 @@
 				CDFCC6589E8234DDBAFB6174 /* Pods_Veryable_Sample.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E3616CC2294E606F009362B2 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				E3616CC3294E6080009362B2 /* NetworkManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +304,7 @@
 			files = (
 				6A948AF8265FF403005A22DA /* VColor.swift in Sources */,
 				515EC6B3242E5FBA00B21DBB /* AppDelegate.swift in Sources */,
+				E3616CC4294E6080009362B2 /* NetworkManager.swift in Sources */,
 				6A948AE5265FEFCB005A22DA /* AccountListViewController.swift in Sources */,
 				6A948B01265FF5CA005A22DA /* ViewColor.swift in Sources */,
 				6A948AEE265FF0E5005A22DA /* Account.swift in Sources */,
