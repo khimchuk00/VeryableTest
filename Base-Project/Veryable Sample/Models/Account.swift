@@ -8,4 +8,16 @@
 
 import Foundation
 
-struct Account {}
+struct Account: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case id
+        case accountType = "account_type"
+        case accountName = "account_name"
+        case description = "desc"
+    }
+
+    var id: Int
+    var accountType: String
+    var accountName: String
+    var description: String
+}
