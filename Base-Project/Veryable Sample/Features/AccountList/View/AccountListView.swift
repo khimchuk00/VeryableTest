@@ -10,10 +10,11 @@ import Foundation
 import UIKit
 import SnapKit
 
-protocol AccountListDelegate: AnyObject {}
+protocol AccountListDelegate: AnyObject {
+    func openDetails(data: Account)
+}
 
 class AccountListView: UIView {
-
     //MARK: Public API
 
     //MARK: Inits
@@ -22,24 +23,37 @@ class AccountListView: UIView {
         super.init(frame: .zero)
         setup()
     }
+
     required init?(coder: NSCoder) { nil }
 
     private func setup() {
         backgroundColor = ViewColor.background.color
 
-        constrain()
+        constraints()
     }
 
-    private func constrain() {
-        helloLabel.snp.makeConstraints {
-            $0.center.equalTo(self)
+    private func constraints() {
+        addSubview(tableView)
+        
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(self)
+            $0.bottom.equalTo(self)
+            $0.leading.equalTo(self)
+            $0.trailing.equalTo(self)
         }
     }
 
     //MARK: Overrides
 
+    // MARK: - Update
+    func update(dataSource: [Account]) {
+        self.dataSource = dataSource
+        tableView.reloadData()
+    }
+
     //MARK: Private members
     private weak var del: AccountListDelegate?
+    private var dataSource: [Account] = []
 
     //MARK: Lazy Loads
     private lazy var helloLabel: UILabel = {
@@ -50,4 +64,27 @@ class AccountListView: UIView {
         addSubview(label)
         return label
     }()
+
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(for: AccountTableViewCell.self)
+
+        return tableView
+    }()
+}
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
+extension AccountListView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        dataSource.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.cell(for: AccountTableViewCell.self, for: indexPath)
+        cell?.configure(account: dataSource[indexPath.row])
+
+        return cell ?? UITableViewCell()
+    }
 }
