@@ -110,4 +110,10 @@ extension AccountListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         .leastNormalMagnitude
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let account = dataSource[AccountType(intValue: indexPath.section)]?[indexPath.row] else { return }
+
+        del?.openDetails(data: account)
+    }
 }

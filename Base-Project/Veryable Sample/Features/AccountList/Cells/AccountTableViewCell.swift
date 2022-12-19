@@ -20,7 +20,6 @@ class AccountTableViewCell: UITableViewCell {
 
     private lazy var mainImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
         addSubview(imageView)
 
         return imageView

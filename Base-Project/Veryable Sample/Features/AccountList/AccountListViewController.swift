@@ -38,9 +38,16 @@ class AccountListViewController: UIViewController, AlertPresentableVC {
                 self?.presentAlert(text: "Something went wrong", description: failure.localizedDescription)
             }
         }
+
+        configureNavigationBar()
     }
 
     //MARK: Private members
+    private func configureNavigationBar() {
+        let textAttributes = [NSAttributedString.Key.foregroundColor: VGrey.dark.color]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+    }
+
     private func convertAccountsData(accounts: [Account]) {
         var dataSource: [AccountType: [Account]] = [:]
         for account in accounts {
@@ -66,6 +73,8 @@ class AccountListViewController: UIViewController, AlertPresentableVC {
 
 extension AccountListViewController: AccountListDelegate {
     func openDetails(data: Account) {
-        // TODO: - add navigation to details
+        let vc = DetailViewController()
+        vc.configure(account: data)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
