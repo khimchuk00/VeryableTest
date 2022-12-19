@@ -10,6 +10,14 @@ import SnapKit
 
 class AccountTableViewCell: UITableViewCell {
     //MARK: - Lazy Loads
+    private lazy var separatorBottomView: UIView = {
+        let view = UIView()
+        view.backgroundColor = VGrey.light.color
+        addSubview(view)
+
+        return view
+    }()
+
     private lazy var mainImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -77,7 +85,7 @@ class AccountTableViewCell: UITableViewCell {
 
         stackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
-            make.bottom.equalToSuperview().offset(-20)
+            make.bottom.equalTo(separatorBottomView.snp.top).offset(-20)
             make.leading.equalTo(mainImageView.snp.trailing).offset(16)
         }
 
@@ -86,6 +94,12 @@ class AccountTableViewCell: UITableViewCell {
             make.centerY.equalTo(stackView)
             make.trailing.equalToSuperview().offset(-20)
             make.leading.equalTo(stackView.snp.trailing).offset(20)
+        }
+
+        separatorBottomView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.trailing.leading.equalToSuperview()
+            make.height.equalTo(1)
         }
 
         stackView.addArrangedSubview(titleLabel)

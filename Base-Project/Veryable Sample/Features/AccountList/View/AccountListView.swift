@@ -101,7 +101,7 @@ extension AccountListView: UITableViewDelegate, UITableViewDataSource {
         let type = AccountType(intValue: section)
         let headerView = AccountTableViewHeader()
 
-        headerView.configure(text: type.title)
+        headerView.configure(accountType: type)
 
         return headerView
     }

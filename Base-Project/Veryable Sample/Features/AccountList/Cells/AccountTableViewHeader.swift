@@ -9,6 +9,22 @@
 import SnapKit
 
 class AccountTableViewHeader: UITableViewHeaderFooterView {
+    private lazy var separatorTopView: UIView = {
+        let view = UIView()
+        view.backgroundColor = VGrey.light.color
+        addSubview(view)
+
+        return view
+    }()
+
+    private lazy var separatorBottomView: UIView = {
+        let view = UIView()
+        view.backgroundColor = VGrey.light.color
+        addSubview(view)
+
+        return view
+    }()
+
     private lazy var titleLabel = {
         let label = UILabel()
         label.font = .vryAvenirNextBold(18)
@@ -18,10 +34,29 @@ class AccountTableViewHeader: UITableViewHeaderFooterView {
         return label
     }()
 
-    func configure(text: String) {
+    func configure(accountType: AccountType) {
+        switch accountType {
+        case .bank:
+            break
+        case .card:
+            separatorTopView.isHidden = true
+        }
+
+        separatorTopView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.trailing.leading.equalToSuperview()
+            make.height.equalTo(1)
+        }
+
+        separatorBottomView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.trailing.leading.equalToSuperview()
+            make.height.equalTo(1)
+        }
+
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(self).offset(10)
-            $0.bottom.equalTo(self).offset(-10)
+            $0.top.equalTo(separatorTopView.snp.bottom).offset(10)
+            $0.bottom.equalTo(separatorBottomView.snp.top).offset(-10)
             $0.leading.equalTo(self).offset(20)
             $0.trailing.equalTo(self).offset(-20)
         }
@@ -34,6 +69,6 @@ class AccountTableViewHeader: UITableViewHeaderFooterView {
             backgroundColor = ViewColor.background.color
         }
 
-        titleLabel.text = text
+        titleLabel.text = accountType.title
     }
 }
