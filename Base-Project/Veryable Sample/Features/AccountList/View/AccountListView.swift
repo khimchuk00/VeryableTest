@@ -46,14 +46,14 @@ class AccountListView: UIView {
     //MARK: Overrides
 
     // MARK: - Update
-    func update(dataSource: [Account]) {
+    func update(dataSource: [AccountType :[Account]]) {
         self.dataSource = dataSource
         tableView.reloadData()
     }
 
     //MARK: Private members
     private weak var del: AccountListDelegate?
-    private var dataSource: [Account] = []
+    private var dataSource: [AccountType :[Account]] = [:]
 
     //MARK: Lazy Loads
     private lazy var helloLabel: UILabel = {
@@ -77,14 +77,19 @@ class AccountListView: UIView {
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension AccountListView: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         dataSource.count
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        dataSource[AccountType(intValue: section)]?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.cell(for: AccountTableViewCell.self, for: indexPath)
-        cell?.configure(account: dataSource[indexPath.row])
+        guard let cell = tableView.cell(for: AccountTableViewCell.self, for: indexPath), let account = dataSource[AccountType(intValue: indexPath.section)]?[indexPath.row] else {
+            return UITableViewCell()
+        }
+        cell.configure(account: account)
 
-        return cell ?? UITableViewCell()
+        return cell
     }
 }

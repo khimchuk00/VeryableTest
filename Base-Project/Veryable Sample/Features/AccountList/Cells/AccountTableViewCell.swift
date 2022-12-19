@@ -97,5 +97,12 @@ class AccountTableViewCell: UITableViewCell {
         titleLabel.text = account.accountName
         accountNameLabel.text = account.description
         descriptionLabel.text = account.accountType
+
+        switch account.type {
+        case .bank:
+            mainImageView.image = UIImage(named: "bank")?.withTintColor(VBlue.normal.color)
+        case .card:
+            mainImageView.image = UIImage(named: "card")?.withTintColor(VBlue.normal.color)
+        }
     }
 }

@@ -8,6 +8,20 @@
 
 import Foundation
 
+enum AccountType: String {
+    case bank
+    case card
+
+    init(intValue: Int) {
+        switch intValue {
+        case 0:
+            self = .bank
+        default:
+            self = .card
+        }
+    }
+}
+
 struct Account: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
@@ -20,4 +34,8 @@ struct Account: Decodable {
     var accountType: String
     var accountName: String
     var description: String
+
+    var type: AccountType {
+        AccountType(rawValue: accountType) ?? .bank
+    }
 }

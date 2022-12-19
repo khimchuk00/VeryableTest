@@ -6,7 +6,6 @@
 //  Copyright © 2021 Veryable Inc. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class AccountListViewController: UIViewController, AlertPresentableVC {
@@ -30,7 +29,7 @@ class AccountListViewController: UIViewController, AlertPresentableVC {
         NetworkManager().getAccounts { [weak self] response in
             switch response {
             case .success(let accounts):
-                self?.customView.update(dataSource: accounts)
+                self?.convertAccountsData(accounts: accounts)
             case .failure(let failure):
                 self?.presentAlert(text: "Something went wrong", description: failure.localizedDescription)
             }
@@ -38,6 +37,22 @@ class AccountListViewController: UIViewController, AlertPresentableVC {
     }
 
     //MARK: Private members
+    private func convertAccountsData(accounts: [Account]) {
+        var dataSource: [AccountType: [Account]] = [:]
+        for account in accounts {
+           addData(dataSource: &dataSource, data: account)
+        }
+
+        customView.update(dataSource: dataSource)
+    }
+
+    private func addData(dataSource: inout [AccountType: [Account]], data: Account) {
+        if dataSource[data.type] == nil {
+            dataSource[data.type] = [data]
+        } else {
+            dataSource[data.type]?.append(data)
+        }
+    }
 
     //MARK: Lazy Loads
     private lazy var customView: AccountListView = {
