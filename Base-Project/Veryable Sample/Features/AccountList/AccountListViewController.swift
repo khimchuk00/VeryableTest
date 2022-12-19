@@ -14,7 +14,8 @@ class AccountListViewController: UIViewController, AlertPresentableVC {
     //MARK: Inits
     init() {
         super.init(nibName: nil, bundle: nil)
-        self.title = "Accounts".uppercased()
+
+        title = "Accounts".uppercased()
     }
 
     required init?(coder: NSCoder) { nil }
@@ -26,6 +27,7 @@ class AccountListViewController: UIViewController, AlertPresentableVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         NetworkManager().getAccounts { [weak self] response in
             switch response {
             case .success(let accounts):

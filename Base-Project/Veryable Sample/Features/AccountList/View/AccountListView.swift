@@ -6,8 +6,6 @@
 //  Copyright © 2021 Veryable Inc. All rights reserved.
 //
 
-import Foundation
-import UIKit
 import SnapKit
 
 protocol AccountListDelegate: AnyObject {
@@ -70,6 +68,11 @@ class AccountListView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(for: AccountTableViewCell.self)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = ViewColor.surface.color
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
 
         return tableView
     }()
@@ -89,7 +92,21 @@ extension AccountListView: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         cell.configure(account: account)
+        cell.selectionStyle = .none
 
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let type = AccountType(intValue: section)
+        let headerView = AccountTableViewHeader()
+
+        headerView.configure(text: type.title)
+
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        .leastNormalMagnitude
     }
 }

@@ -20,6 +20,15 @@ enum AccountType: String {
             self = .card
         }
     }
+
+    var title: String {
+        switch self {
+        case .bank:
+            return "Bank Accounts"
+        case .card:
+            return "Cards"
+        }
+    }
 }
 
 struct Account: Decodable {
