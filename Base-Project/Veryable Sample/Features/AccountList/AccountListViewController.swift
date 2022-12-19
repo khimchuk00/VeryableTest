@@ -10,6 +10,7 @@ import UIKit
 
 class AccountListViewController: UIViewController, AlertPresentableVC {
     //MARK: Public API
+    var networkManager: LoadDataProtocol?
 
     //MARK: Inits
     init() {
@@ -27,8 +28,9 @@ class AccountListViewController: UIViewController, AlertPresentableVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        networkManager = NetworkManager()
 
-        NetworkManager().getAccounts { [weak self] response in
+        networkManager?.getAccounts { [weak self] response in
             switch response {
             case .success(let accounts):
                 self?.convertAccountsData(accounts: accounts)
